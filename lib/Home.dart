@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:grouped_list/grouped_list.dart';
+import 'package:custom_rounded_rectangle_border/custom_rounded_rectangle_border.dart';
 import 'DataManager.dart';
 import 'package:fshf_test/custom_widgets/CompetitionListTile.dart';
 import 'package:fshf_test/custom_widgets/MatchListTile.dart';
@@ -56,13 +57,18 @@ class _HomeState extends State<Home> {
                   FlatButton(
                     onPressed: null,
                     child: Text("LIVE"),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            bottomLeft: Radius.circular(10)
-                        ),
-                        side: BorderSide(color: Colors.red, width: 1)
+                    shape: CustomRoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          bottomLeft: Radius.circular(10)
+                      ),
+                      leftSide: BorderSide(color: Colors.red),
+                      topSide: BorderSide(color: Colors.red),
+                      bottomSide: BorderSide(color: Colors.red),
+                      topLeftCornerSide: BorderSide(color: Colors.red),
+                      bottomLeftCornerSide: BorderSide(color: Colors.red)
                     ),
+                    minWidth: 60,
                   ),
                   FlatButton(
                       onPressed: Platform.isAndroid
@@ -89,12 +95,17 @@ class _HomeState extends State<Home> {
                               );
                             }
                           ),
-                      shape: RoundedRectangleBorder(
+                      shape: CustomRoundedRectangleBorder(
                           borderRadius: BorderRadius.only(
                               topRight: Radius.circular(10),
                               bottomRight: Radius.circular(10)
                           ),
-                          side: BorderSide(color: Colors.red, width: 1)
+                          leftSide: BorderSide(color: Colors.red),
+                          rightSide: BorderSide(color: Colors.red),
+                          topSide: BorderSide(color: Colors.red),
+                          bottomSide: BorderSide(color: Colors.red),
+                          topRightCornerSide: BorderSide(color: Colors.red),
+                          bottomRightCornerSide: BorderSide(color: Colors.red)
                       ),
                       child: Text("${selectedDate.toLocal()}".split(' ')[0])
                   ),
