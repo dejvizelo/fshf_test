@@ -54,21 +54,19 @@ class _HomeState extends State<Home> {
               children: [
                 TextSpan(
                     text: 'REZULTATE ',
-                    style: TextStyle(fontWeight: FontWeight.normal, fontSize: 23)
-                ),
+                    style: TextStyle(fontWeight: FontWeight.normal, fontSize: 23)),
                 TextSpan(
                     text: 'LIVE',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23)
-                )
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23))
               ],
             ),
           ),
           centerTitle: true,
           flexibleSpace: Image(
-            image: AssetImage('assets/cover-mobile.jpg'),
-            fit: BoxFit.cover,
-            color: Colors.red,
-            colorBlendMode: BlendMode.modulate
+              image: AssetImage('assets/cover-mobile.jpg'),
+              fit: BoxFit.cover,
+              color: Colors.red,
+              colorBlendMode: BlendMode.modulate
           ),
           toolbarHeight: 70,
         ),
@@ -83,57 +81,74 @@ class _HomeState extends State<Home> {
                     onPressed: null,
                     child: Text("LIVE"),
                     shape: CustomRoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          bottomLeft: Radius.circular(10)
-                      ),
-                      leftSide: BorderSide(color: Colors.red),
-                      topSide: BorderSide(color: Colors.red),
-                      bottomSide: BorderSide(color: Colors.red),
-                      topLeftCornerSide: BorderSide(color: Colors.red),
-                      bottomLeftCornerSide: BorderSide(color: Colors.red)
-                    ),
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            bottomLeft: Radius.circular(10)),
+                        leftSide: BorderSide(color: Colors.red),
+                        topSide: BorderSide(color: Colors.red),
+                        bottomSide: BorderSide(color: Colors.red),
+                        topLeftCornerSide: BorderSide(color: Colors.red),
+                        bottomLeftCornerSide: BorderSide(color: Colors.red)),
                     minWidth: 60,
                   ),
                   FlatButton(
-                      onPressed: Platform.isAndroid
+                      onPressed: !Platform.isAndroid
                           ? () => _selectDate(context)
                           : () => showCupertinoModalPopup(
-                            context: context,
-                            builder: (context) {
-                              return Container(
-                                height: 250,
-                                child: CupertinoDatePicker(
-                                  backgroundColor: Colors.white,
-                                  mode: CupertinoDatePickerMode.date,
-                                  initialDateTime: selectedDate,
-                                  minimumYear: 2015,
-                                  maximumYear: 2022,
-                                  onDateTimeChanged: (dateTime) {
-                                    if (dateTime != null && dateTime != selectedDate)
-                                    setState(() {
-                                      selectedDate = dateTime;
-                                      matchesFuture = _getMatches();
-                                    });
-                                  },
-                                ),
-                              );
-                            }
-                          ),
+                              context: context,
+                              builder: (context) {
+                                DateTime date = selectedDate;
+                                return Container(
+                                  color: Colors.white,
+                                  height: 250,
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                        children: [
+                                          TextButton(
+                                              onPressed: () => Navigator.of(context).pop(),
+                                              child: Text("Mbyll", style: TextStyle(color: Colors.red))),
+                                          TextButton(
+                                              onPressed: 
+                                                   () => setState(() {
+                                                        selectedDate = date;
+                                                        matchesFuture = _getMatches();
+                                                        Navigator.of(context).pop();
+                                                      }),
+                                              child: Text("Zgjidh", style: TextStyle(color: Colors.green))
+                                          )
+                                        ],
+                                      ),
+                                      Container(
+                                        height: 200,
+                                        child: CupertinoDatePicker(
+                                          //backgroundColor: Colors.white,
+                                          mode: CupertinoDatePickerMode.date,
+                                          initialDateTime: selectedDate,
+                                          minimumYear: 2015,
+                                          maximumYear: 2022,
+                                          onDateTimeChanged: (dateTime) {
+                                            if (dateTime != null && dateTime != selectedDate)
+                                              date = dateTime;
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              }),
                       shape: CustomRoundedRectangleBorder(
                           borderRadius: BorderRadius.only(
                               topRight: Radius.circular(10),
-                              bottomRight: Radius.circular(10)
-                          ),
+                              bottomRight: Radius.circular(10)),
                           leftSide: BorderSide(color: Colors.red),
                           rightSide: BorderSide(color: Colors.red),
                           topSide: BorderSide(color: Colors.red),
                           bottomSide: BorderSide(color: Colors.red),
                           topRightCornerSide: BorderSide(color: Colors.red),
-                          bottomRightCornerSide: BorderSide(color: Colors.red)
-                      ),
-                      child: Text("${selectedDate.toLocal()}".split(' ')[0])
-                  ),
+                          bottomRightCornerSide: BorderSide(color: Colors.red)),
+                      child: Text("${selectedDate.toLocal()}".split(' ')[0])),
                 ],
               ),
             ),
@@ -151,12 +166,12 @@ class _HomeState extends State<Home> {
                                   color: Colors.grey,
                                 ),
                                 Text(
-                                  "Nuk ka ndeshje per daten " + "${selectedDate.toLocal()}".split(' ')[0],
+                                  "Nuk ka ndeshje per daten " +
+                                      "${selectedDate.toLocal()}".split(' ')[0],
                                   style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.grey
-                                  ),
+                                      color: Colors.grey),
                                 ),
                               ],
                             )
@@ -184,10 +199,8 @@ class _HomeState extends State<Home> {
                     return Expanded(
                         child: Center(child: CircularProgressIndicator()));
                   }
-                }
-            )
+                })
           ],
-        )
-    );
+        ));
   }
 }
