@@ -77,21 +77,26 @@ class _MatchListTileState extends State<MatchListTile> {
               ),
               Container(
                 margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                padding: EdgeInsets.all(8),
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.red),
                   borderRadius: BorderRadius.circular(10),
-                  color: Colors.transparent,
                 ),
+                width: 35,
                 child: Column(
                   children: [
-                    Text(widget.score1.toString()),
+                    Container(
+                        child: Text(widget.score1.toString()),
+                        padding: EdgeInsets.fromLTRB(8, 8, 8, 0)
+                    ),
                     Divider( // for some reason this does not show up
                       color: Colors.red,
-                      height: 10,
+                      height: 16,
                       thickness: 1,
                     ),
-                    Text(widget.score2.toString())
+                    Container(
+                        child: Text(widget.score2.toString()),
+                        padding: EdgeInsets.fromLTRB(8, 0, 8, 8)
+                    )
                   ],
                 ),
               )
