@@ -44,8 +44,33 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("REZULTATE LIVE"),
+          leading: Padding(
+            padding: const EdgeInsets.all(5),
+            child: Image.asset("assets/logo.png"),
+          ),
+          leadingWidth: 80,
+          title: Text.rich(
+            TextSpan(
+              children: [
+                TextSpan(
+                    text: 'REZULTATE ',
+                    style: TextStyle(fontWeight: FontWeight.normal, fontSize: 23)
+                ),
+                TextSpan(
+                    text: 'LIVE',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23)
+                )
+              ],
+            ),
+          ),
           centerTitle: true,
+          flexibleSpace: Image(
+            image: AssetImage('assets/cover-mobile.jpg'),
+            fit: BoxFit.cover,
+            color: Colors.red,
+            colorBlendMode: BlendMode.modulate
+          ),
+          toolbarHeight: 70,
         ),
         body: Column(
           children: [
